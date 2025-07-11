@@ -1,97 +1,120 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# Group Chat App (React Native + Node.js + Socket.IO)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+A real-time group chat app built with React Native (frontend) and Node.js/Express/Socket.IO (backend).
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Real-time group chat with WebSocket (Socket.IO)
+- Modern dark theme
+- Last 20 messages are persisted in memory and shown to new users
+- Responsive UI for Android/iOS
+
+---
+
+## Prerequisites
+
+- Node.js (v18 or above)
+- npm
+- React Native CLI & environment ([React Native setup guide](https://reactnative.dev/docs/environment-setup))
+- Android Studio or Xcode (for running on device/emulator)
+- Both your phone and your laptop/server must be on the same Wi-Fi network for local development
+
+---
+
+## 1. Clone the repository
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+git clone <your-repo-url>
+cd groupChat
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 2. Install dependencies
+
+```sh
+npm install
+```
+
+---
+
+## 3. Configure the WebSocket Server IP
+
+**IMPORTANT:**
+
+- The React Native app must connect to your laptop's local IP address (not `localhost` or `127.0.0.1`) for WebSocket to work on a physical device.
+- Find your laptop's IP address (e.g., `192.168.1.6`) using `ipconfig` (Windows) or `ifconfig` (Mac/Linux).
+- Open `App.tsx` and set:
+
+```js
+const SOCKET_URL = 'http://<YOUR_LAPTOP_IP>:3001';
+```
+
+Example:
+
+```js
+const SOCKET_URL = 'http://192.168.1.6:3001';
+```
+
+---
+
+## 4. Start the Backend Server
+
+```sh
+node server.js
+```
+
+- The server will run on port 3001 by default.
+- You should see `Server listening on port 3001` in your terminal.
+
+---
+
+## 5. Start Metro Bundler (React Native)
+
+```sh
+npm start
+
+```
+
+---
+
+## 6. Run the App on your Device/Emulator
 
 ### Android
 
 ```sh
-# Using npm
 npm run android
 
-# OR using Yarn
-yarn android
 ```
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
 ```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
 
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 7. Usage
 
-## Step 3: Modify your app
+- Enter a username to join the chat.
+- Send and receive messages in real time.
+- New users see the last 20 messages when they join.
 
-Now that you have successfully run the app, let's make changes!
+---
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Troubleshooting
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- **Cannot connect to chat server?**
+  - Make sure your phone and laptop are on the same Wi-Fi network.
+  - Double-check the IP address in `App.tsx` matches your laptop's IP.
+  - Ensure your firewall allows incoming connections on port 3001.
+  - Restart both the server and the app if you change the IP.
+- **Metro not running?**
+  - Run `npm start` or `yarn start` in the project root.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
