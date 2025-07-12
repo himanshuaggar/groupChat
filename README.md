@@ -27,7 +27,7 @@ A real-time group chat app built with React Native (frontend) and Node.js/Expres
 ## 1. Clone the repository
 
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/himanshuaggar/groupChat.git
 cd groupChat
 ```
 
