@@ -105,6 +105,13 @@ export default function App() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   if (!username) {
     return (
       <SafeAreaView style={styles.container}>
